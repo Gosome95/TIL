@@ -1,7 +1,7 @@
 ## Velopert's Hello Unity
 
 > Velopert님 <Unity 삽질> Youtube 영상을 보고 작성해보는 TIL 
-[Velopert 1. Hello Unity](https://youtu.be/_w14ir-ImwU)
+ [Velopert 1. Hello Unity](https://youtu.be/_w14ir-ImwU)
 
 
 ## What I Learned 
@@ -10,8 +10,8 @@
 - 확실히 나 같은 초짜에 비하면 두려움이 없달까? 막힘이 없다. '이렇게 해보지 뭐' 이런 태도 
 - 유연하다..!! 이 점이 가장 두드러졌는데, 어떤 문제가 발생했는데 그걸 당장 해결이 안되면 일단 넘어가고 제한 된 시간 안에 Output결과물을 뽑기 위한 생산성에 더 집중하는 모습을 엿볼 수 있었다. 
 - Unity 1도 모른다고 하셨지만, `개발`이라는 것을 어떻게 하는지에 대한 `체계`내지 `System`이 있으니까 어떤 행동(action)을 해야한다고 명확하고 분명(clear)했다.
-- 이렇게 자신만의 체계를 세울 수 있는 게 개발자로서 더 필요한 역량에서 능력아닐까 생각해보게 된다.  
--
+- 이렇게 자신만의 체계를 세울 수 있는 게 개발자로서 더 필요한 역량*능력아닐까 생각해보게 된다.  
+
 
 ## What I watched 
 
