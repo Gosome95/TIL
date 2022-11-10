@@ -124,7 +124,7 @@ void Update()
 	# 변경하는 텍스처의 이름은 newCube.png
 	if(Input.GetKeyDown(KeyCode.F2))
 	{
-		GetComponent<MeshRenderer>().material.mainTexture = Resource.Load<Texture2D>("newCub");
+		GetComponent<MeshRenderer>().material.mainTexture = Resource.Load<Texture2D>("newCube");
 		// 자료형 Texture2D
 	}
 }
