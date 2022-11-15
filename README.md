@@ -9,7 +9,7 @@ Today I Learned
 
 ![use MindMap](https://github.com/Gosome95/TIL/blob/main/images/DevStudy.png?raw=true)
 
-#### 프로그래머의 길 멘토에게 길을 묻다 [책 링크](http://aladin.kr/p/aFfS7)
+#### [프로그래머의 길 멘토에게 길을 묻다](http://aladin.kr/p/aFfS7)
 - 배운 것을 기록하라
 - [ ]  GitHub TIL 저장소
     - [ ]  이 책에 대한 당신의 생각이나 읽은 뒤에 떠오르는 아이디어를 메모하기 시작하라 
