@@ -12,34 +12,44 @@ namespace MyApp
             Archer = 2,
             Mage = 3
          }
+
+        // Add [Choose class]Method
+        static ClassType ChooseClass()
+        {
+            Console.WriteLine("직업을 선택하세요!");
+            Console.WriteLine("[1] 기사");
+            Console.WriteLine("[2] 궁수");
+            Console.WriteLine("[3] 법사");
+
+            ClassType choice = ClassType.None;
+            string input = Console.ReadLine();
+            switch (input)
+            {
+                case "1":
+                    choice = ClassType.Knight;
+                    break;
+                case "2":
+                    choice = ClassType.Archer;
+                    break;
+                case "3":
+                    choice = ClassType.Mage;
+                    break;
+            }
+            return choice; 
+        }
+
      
         static void Main(string[] args)
         {
-            // init(initialization) enum
-            ClassType choice = ClassType.None; 
-
-            while (choice == ClassType.None)
+            while (true)
             {
                 Console.WriteLine("Hello World!");
-                Console.WriteLine("직업을 선택하세요!");
-                Console.WriteLine("[1] 기사");
-                Console.WriteLine("[2] 궁수");
-                Console.WriteLine("[3] 법사");
 
-                string input = Console.ReadLine();
-
-                switch(input)
-                {
-                    case "1":
-                        choice = ClassType.Knight;
-                        break;
-                    case "2":
-                        choice = ClassType.Archer;
-                        break;
-                    case "3":
-                        choice = ClassType.Mage;
-                        break; 
-                }
+                // init(initialization) enum
+                // call the method
+                ClassType choice = ChooseClass();
+                if (choice != ClassType.None)
+                    break; 
             }
 
         }
