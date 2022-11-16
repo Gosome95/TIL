@@ -245,6 +245,7 @@ static void Main(string[] args)
 ### return 및 ref 와 out 개념 추가 
 
 #### return 
+[함수의 반환타입 Rokiss Q&A](https://inflearn.com/questions/411030)
 [retrun searching 내용](https://smoothiecoding.kr/return-type-csharp-basics/)
 -  return 문은 메소드를 종료하고 호출자에게 복귀하는게 목적이지만 동작은 break나 continue 같은 점프문(jump statement)에 속합니다.
 - 메소드의 실행이 끝나면 둘 중 하나입니다. 뭔가 값을 돌려주거나 아니면 그냥 호출자에게 복귀하는 것 입니다.
