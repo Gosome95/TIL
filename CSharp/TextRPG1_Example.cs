@@ -18,7 +18,7 @@ namespace MyApp
             // init(initialization) enum
             ClassType choice = ClassType.None; 
 
-            while (true)
+            while (choice == ClassType.None)
             {
                 Console.WriteLine("Hello World!");
                 Console.WriteLine("직업을 선택하세요!");
@@ -40,9 +40,6 @@ namespace MyApp
                         choice = ClassType.Mage;
                         break; 
                 }
-                if (choice != ClassType.None)
-                    break;
-
             }
 
         }
