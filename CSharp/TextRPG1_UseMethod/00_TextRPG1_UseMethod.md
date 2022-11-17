@@ -14,8 +14,8 @@
 - 호출스텍 : 여기까지 오게 된 경로 간접체험 
 - 한 단계씩 코드 실행 (⌘F11) -> Line by line
 - 프로시저 단위 실행 (⇧⌘O, F10) -> 함수(Method)단위 실행 
-
 </br>   
+
 #### 메소드 디버깅 호출 과정 ≒ 영화 \<Inception\>
 - 현실 → 1차 꿈 → 2차 꿈 → 3차 꿈
 - depth가 늘어남. 꿈의 여러가지 깊이(depth)
@@ -47,15 +47,18 @@ static void Main(string[] args)
 	Program.AddAndPrint(10, 20); // 이때만 Breakpoint
 }
 ```
-- MMORPG, 무수히 많은 몬스터 객체 중 특정 ID의 몬스터를 관찰하고 싶을 때 ID조건을 디버깅해서 멈추어보는게 가능하다. ([상용게임에선 안 됨!]([https://inflearn.com/questions/93750](https://inflearn.com/questions/93750)))
+- MMORPG, 무수히 많은 몬스터 객체 중 특정 ID의 몬스터를 관찰하고 싶을 때 ID조건을 디버깅해서 멈추어보는게 가능하다. ([상용게임에선 안 됨!](https://inflearn.com/questions/93750))
 
 -   중단점(Breakpoint) 말고 Console.WriteLine() 으로 로그를 남기는 방법도 있음
     -   Unity에서는 주로 쓰이는 방법이긴 함
     -   프로그램을 있는 그대로 분석할 수 없고 프로그램이 커지면 커질 수록 부담이 될 수 있음
 </br>
 
-## TextRPG 만들기 in procedure-oriented program
+--- 
 
+# TextRPG 만들기 in procedure-oriented program
+
+## TextRPG1 - 직업 선택하기 
 ### 1. 간단 구현
 ```csharp
 namespace MyApp
@@ -196,5 +199,6 @@ static void Main(string[] args)
 	- `choice = ChooseClass()` 작업이 바뀐다 
 	- [Rokiss Q&A](https://inflearn.com/questions/204273)
 </br>
+
 - [Rokiss Q&A : ClassType choice = 0 으로 하면 안되나요?](https://inflearn.com/questions/204041)
 	- 코드 가독성을 따져주자 
