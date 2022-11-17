@@ -2,6 +2,72 @@
 
 > 인프런 `Rookiss`님의 [<C#과 유니티로 만드는 MMORPG게임 개발 시리즈 Part1:C#기본문법>](https://inf.run/CJG3) 내용을 보고 공부목적으로 작성한 글 입니다.
 
+## TextRPG 만들기 메뉴얼 
+
+### 직업 선택하기 
+- [ ] 최종 Goal : 직업(class) 선택할 수 있도록 로비화면을 설계하는 함수 만들기 
+- [ ] 직업 범위 안에 있는 값이 아니면 재입력을 요구할 것 
+- [ ] 직업 선택을 구현하는 부분은 하드코딩 하지 않도록 할 것 
+	- [ ] [enum 형태로 설계](https://github.com/Gosome95/TIL/commit/c6edb37f0eb3d8f8c4b5fcb977585ef9d9b0af64) 
+	- [ ] enum 변수명은 ClassType 
+- [ ] 직업선택 함수 만들기 
+	- [ ] 함수명은 ChooseClass()  
+	- [ ] 함수 안 로컬변수 선언(변수명은 choice) 및 초기화를 진행해줄것. 
+	- [ ] 함수에서 [직업 선택창] 띄워주기 
+	- [ ] 사용자 입력을 받아 직업 선택 
+	- [ ] switch 문으로 [ClassType] 정해주기 
+	- [ ] 함수 안에서 사용된 로컬변수 choice를 외부로 알리는 코드 추가 
+		- [ ] 간단하게는 함수의 반환타입 이용 (hint : enum ClassType)
+		- [ ] ref, out 으로도 가능 
+- [최종 구현 예시](https://github.com/Gosome95/TIL/commit/299122b723581233125b9c0bc7ce6ed8527d0e5a)
+
+### 플레이어 생성하기 
+- [ ] 최종 Goal : Player Character를 생성하는 함수 만들기 
+	- [ ] 각 직업은 스텟(stat)을 갖고 있음. 최초 시작은 `{hp, attack}`
+	- [ ] `CratePlayer 함수`를 호출하면 `{hp, attack}`이 각 직업에 맞게 채워지길 바람
+
+- [ ] 직업 스텟은 구조체(struct) 형태로 포장 관리 
+	- [ ] 구조체 명 = Player
+	- [ ] 구조체 안 접근한정자 = public
+- [ ] CreatePlayer함수 인수(Argument)와 매개변수(Parmeter) 결정
+	- [ ] Main 함수 호출 시 
+		- [ ] 첫번째 인수 = ClassType choice
+		- [ ] 두번째 인수 = struct로 선언한 Player 
+	- [ ] 함수 입력(input) 매개변수
+		- [ ] 첫번재 인자 = ClassType choice
+		- [ ] 두번째 인자 = struct로 선언한 Player 
+```cs
+// CreatePlayer Method
+static void CreatePlayer(ClassType choice, out Player player)
+
+// Main Method
+Player player;
+CreatePlayer(choice, out player);
+	// choice 변수는 Main 함수에서 이전에 선언해주었음 
+```
+- [ ] Main 함수 
+	- [ ]  `if(choice != Classtype.None)` 분기 이후, `CratePlayer 함수`를 호출하여 캐릭터 생성
+	- [ ] 구조체 선언. 변수명 = player
+	- [ ] 최종 로그를 찍어서 확인 
+- [ ] Player Character 생성 함수 = CreatePlayer() 
+	- [ ] switch 문을 사용해서 각 직업 스텟 정해주기 
+		- 기사 hp 100, attack 10
+		- 궁수 hp 75, attack 12
+		- 법사 hp 50, attack 15
+	- [ ] default 값 설정해주기 
+- [구조체(struct) 없이 만든 코드](https://github.com/Gosome95/TIL/commit/b7e2f9b10a3305be5486464f42b0f6169114871e)
+- [구현 예시 코드](https://github.com/Gosome95/TIL/commit/d2e3f679bf34696e816d6a02d0a71d69fb238f1b)  
+
+</br>
+
+- 설명 
+- Main 함수에서 입력받은 `choice 변수` 정보를 `CreatePlayer() 함수`로 넘겨줘야 한다
+-  함수 인자(매개변수)는 여러개일 수 있지만, 반환은 하나만 가능
+- `ChooseClass()` 는 조작(처리)해야 될 값이 오직 ClassType choice; 하나 뿐이라 반환이 가능했음
+- 이 경우에는 반환해야 할 값이 처음에는 { out int, out int attack } 이렇게 있고, 더 추가될 수 있으니까 구조체를 이용하여 반환하기 
+
+--- 
+
 ## 디버깅 기초 
 - [마이크로소프트 공식문서](https://learn.microsoft.com/ko-kr/visualstudio/debugger/what-is-debugging?view=vs-2022)
 - [Mac용 Visual Studio를 사용하여 디버깅](https://learn.microsoft.com/ko-kr/visualstudio/mac/debugging?view=vsmac-2022)
