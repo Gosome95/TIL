@@ -13,6 +13,15 @@ namespace MyApp
             Mage = 3
          }
 
+        // ADD struct
+        struct Player
+        {
+            // Basic stat(Variable Statistics)
+            // Add access modifier(접근 한정자)
+            public int hp;
+            public int attack;
+            // public ClassType type;   // Optional 
+        } 
         // Add [Choose class]Method
         static ClassType ChooseClass()
         {
@@ -39,25 +48,25 @@ namespace MyApp
         }
 
         // Add [Create Player] Method
-        static void CreatePlayer(ClassType choice, out int hp, out int attack)
+        static void CreatePlayer(ClassType choice, out Player player)
         {
             switch (choice)
             {
                 case ClassType.Knight:
-                    hp = 100;
-                    attack = 10;
+                    player.hp = 100;
+                    player.attack = 10;
                     break;
                 case ClassType.Archer:
-                    hp = 75;
-                    attack = 12;
+                    player.hp = 75;
+                    player.attack = 12;
                     break;
                 case ClassType.Mage:
-                    hp = 50;
-                    attack = 15;
+                    player.hp = 50;
+                    player.attack = 15;
                     break;
                 default:
-                    hp = 0;
-                    attack = 0; 
+                    player.hp = 0;
+                    player.attack = 0; 
                     break;
             }
 
@@ -76,13 +85,13 @@ namespace MyApp
                 // choice = Player Input 
                 if (choice != ClassType.None)
                 {                    
-                    // Basic stat(Variable Statistics)
-                    int hp; 
-                    int attack; 
+                    // [Captial Player]User-defined type = sturct Player 
+                    // [Small player] variavle name
+                    Player player; 
                     // Call the Make Player's Character Method
-                    CreatePlayer(choice, out hp, out attack);
+                    CreatePlayer(choice, out player);
                     
-                    Console.WriteLine($"HP{hp} Attack{attack}");
+                    Console.WriteLine($"HP {player.hp} Attack {player.attack}");
                 } 
             }
 
