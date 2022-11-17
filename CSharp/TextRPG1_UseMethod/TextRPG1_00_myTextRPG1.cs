@@ -12,6 +12,11 @@ namespace MyApp
             Fitzgerald = 3   // Scott Fitzgerald
         }
 
+        struct Player
+        {
+            public int hp;
+            public int attack; 
+        }
         static ClassType ChooseClass()
         {
             ClassType choice = ClassType.None;
@@ -38,8 +43,31 @@ namespace MyApp
             return choice;
         }
 
-
-
+        static void CreatePlayer(ClassType choice, out Player player)
+        {
+            // set the Stat
+            // Random Haruki(100/10) | Hemingway(75/12) | Fitzgerald(50/15)
+            switch(choice)
+            {
+                case ClassType.Haruki:
+                    player.hp = 100;
+                    player.attack = 10;
+                    break;
+                case ClassType.Hemingway:
+                    player.hp = 75;
+                    player.attack =12;
+                    break;
+                case ClassType.Fitzgerald:
+                    player.hp = 50;
+                    player.attack = 15;
+                    break;
+                default:
+                    player.hp = 0;
+                    player.attack = 0; 
+                    break;
+            }
+        }
+        
         static void Main(string[] args)
         {
             Console.WriteLine("안녕하세요");
@@ -51,9 +79,13 @@ namespace MyApp
             {
                 ClassType choice = ChooseClass();
                 if (choice != ClassType.None)
-                    break; 
-                
+                {
+                    Player player;
+                    CreatePlayer(choice, out player);
 
+                    // for Check log
+                    Console.WriteLine($"HP{player.hp}, Attack{player.attack}");
+                }
             }
         }
     }
