@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 
 namespace MyApp
 {
@@ -23,26 +24,18 @@ namespace MyApp
             // public ClassType type;   // Optional 
         }
 
-        // [Enter the Game] Method
-        static void EnterGame()
+        // about Monster
+        enum MonsterType
         {
-            while (true)
-            {
-                Console.WriteLine("마을에 접속했습니다!");
-                Console.WriteLine("[1] 필드로 가기");
-                Console.WriteLine("[2] 로비로 돌악가기");
-                Console.Write("갈 곳을 정해주세요 : ");
-
-                string input = Console.ReadLine();
-                if (input == "1")
-                {
-
-                }
-                else if (input == "2")
-                {
-                    break;
-                }
-            }
+            None = 0,
+            Slime = 1,
+            Orc = 2,
+            Skeleton = 3
+        }
+        struct Monster
+        {
+            public int hp;
+            public int attack; 
         }
 
         // Add [Choose class]Method
@@ -95,6 +88,68 @@ namespace MyApp
 
         }
 
+        // input[EnterFiled] -> Create Monster
+        static void CreateRandomMonster(out Monster monster)
+        {
+            Random rand = new Random();
+            int input = rand.Next(1, 4);
+
+            switch(input)
+            {
+                case (int)MonsterType.Slime:
+                    monster.hp = 20;
+                    monster.attack = 2;
+                    Console.WriteLine("슬라임이 생성되었습니다");
+                    break;
+                case (int)MonsterType.Orc:
+                    monster.hp = 40;
+                    monster.attack = 4;
+                    break;
+                case (int)MonsterType.Skeleton:
+                    monster.hp = 30;
+                    monster.attack = 3;
+                    Console.WriteLine("오크가 생성되었습니다");
+                    break;
+                default:
+                    monster.hp = 0;
+                    monster.attack = 0;
+                    Console.WriteLine("스켈레톤이 생성되었습니다");
+                    break;
+            }
+
+        }
+
+        // [Enter the Game] Method
+        static void EnterGame()
+        {
+            while (true)
+            {
+                Console.WriteLine("마을에 접속했습니다!");
+                Console.WriteLine("[1] 필드로 가기");
+                Console.WriteLine("[2] 로비로 돌악가기");
+                Console.Write("갈 곳을 정해주세요 : ");
+
+                string input = Console.ReadLine();
+                if (input == "1")
+                {
+                    EnterField();
+                }
+                else if (input == "2")
+                {
+                    break;
+                }
+            }
+        }
+
+        // Enter Field Mehtod 
+        static void EnterField()
+        {
+            Console.WriteLine("필드에 들어왔습니다!");
+            Monster monster;
+            CreateRandomMonster(out monster);
+            Console.WriteLine($"Monster's HP {monster.hp} Monster's Attack {monster.attack}");
+        }
+
         static void Main(string[] args)
         {
             while (true)
@@ -112,7 +167,7 @@ namespace MyApp
                     // Call the Make Player's Character Method
                     CreatePlayer(choice, out player);
 
-                    Console.WriteLine($"HP {player.hp} Attack {player.attack}");
+                    Console.WriteLine($"Player's HP {player.hp} Player's Attack {player.attack}");
 
                     EnterGame(); 
 
