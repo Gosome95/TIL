@@ -18,7 +18,7 @@
 	- [ ] switch 문으로 [ClassType] 정해주기 
 	- [ ] 함수 안에서 사용된 로컬변수 choice를 외부로 알리는 코드 추가 
 		- [ ] 간단하게는 함수의 반환타입 이용 (hint : enum ClassType)
-		- [ ] ref, out 으로도 가능 
+		- [ ] ref, out 으로도 가능     
 - [최종 구현 예시](https://github.com/Gosome95/TIL/commit/299122b723581233125b9c0bc7ce6ed8527d0e5a)
 
 ### 플레이어 생성하기 
@@ -54,7 +54,7 @@ CreatePlayer(choice, out player);
 		- 기사 hp 100, attack 10
 		- 궁수 hp 75, attack 12
 		- 법사 hp 50, attack 15
-	- [ ] default 값 설정해주기 
+	- [ ] default 값 설정해주기    
 - [구조체(struct) 없이 만든 코드](https://github.com/Gosome95/TIL/commit/b7e2f9b10a3305be5486464f42b0f6169114871e)
 - [구현 예시 코드](https://github.com/Gosome95/TIL/commit/d2e3f679bf34696e816d6a02d0a71d69fb238f1b)  
 
@@ -65,6 +65,14 @@ CreatePlayer(choice, out player);
 -  함수 인자(매개변수)는 여러개일 수 있지만, 반환은 하나만 가능
 - `ChooseClass()` 는 조작(처리)해야 될 값이 오직 ClassType choice; 하나 뿐이라 반환이 가능했음
 - 이 경우에는 반환해야 할 값이 처음에는 { out int, out int attack } 이렇게 있고, 더 추가될 수 있으니까 구조체를 이용하여 반환하기 
+
+### 캐릭터 생성함수까지 구현해보고 막힌부분
+- 강의 직후 Manual 보면서 막혔던 부분 
+	- struct 사용 
+	- 함수 내부에서 swich case 문 사용
+- 강의 이후) 직업 포장할 때 `enum` 빨간 줄 표시 
+	-  `;`  을 붙여주는줄 알았는데   `,`  였음 
+- `CreaterPlayer()` `default`를 써주지 않으면 왜 오류?
 
 --- 
 
