@@ -1,6 +1,6 @@
 using System;
 
-namespace MyApp 
+namespace MyApp
 {
     internal class Program
     {
@@ -11,7 +11,7 @@ namespace MyApp
             Knight = 1,
             Archer = 2,
             Mage = 3
-         }
+        }
 
         // ADD struct
         struct Player
@@ -21,7 +21,30 @@ namespace MyApp
             public int hp;
             public int attack;
             // public ClassType type;   // Optional 
-        } 
+        }
+
+        // [Enter the Game] Method
+        static void EnterGame()
+        {
+            while (true)
+            {
+                Console.WriteLine("마을에 접속했습니다!");
+                Console.WriteLine("[1] 필드로 가기");
+                Console.WriteLine("[2] 로비로 돌악가기");
+                Console.Write("갈 곳을 정해주세요 : ");
+
+                string input = Console.ReadLine();
+                if (input == "1")
+                {
+
+                }
+                else if (input == "2")
+                {
+                    break;
+                }
+            }
+        }
+
         // Add [Choose class]Method
         static ClassType ChooseClass()
         {
@@ -44,7 +67,7 @@ namespace MyApp
                     choice = ClassType.Mage;
                     break;
             }
-            return choice; 
+            return choice;
         }
 
         // Add [Create Player] Method
@@ -66,33 +89,34 @@ namespace MyApp
                     break;
                 default:
                     player.hp = 0;
-                    player.attack = 0; 
+                    player.attack = 0;
                     break;
             }
 
         }
-     
+
         static void Main(string[] args)
         {
             while (true)
             {
-                Console.WriteLine("Hello World!");
-
                 // init(initialization) enum
                 // call the method
                 ClassType choice = ChooseClass();
 
                 // choice = Player Input 
                 if (choice != ClassType.None)
-                {                    
+                {
                     // [Captial Player]User-defined type = sturct Player 
                     // [Small player] variavle name
-                    Player player; 
+                    Player player;
                     // Call the Make Player's Character Method
                     CreatePlayer(choice, out player);
-                    
+
                     Console.WriteLine($"HP {player.hp} Attack {player.attack}");
-                } 
+
+                    EnterGame(); 
+
+                }
             }
 
         }
