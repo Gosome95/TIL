@@ -4,7 +4,7 @@
 
 ## TextRPG 만들기 메뉴얼 
 
-### 직업 선택하기 
+### 게임 로비만들기 Manual
 - [ ] 최종 Goal : 직업(class) 선택할 수 있도록 로비화면을 설계하는 함수 만들기 
 - [ ] 직업 범위 안에 있는 값이 아니면 재입력을 요구할 것 
 - [ ] 직업 선택을 구현하는 부분은 하드코딩 하지 않도록 할 것 
@@ -21,7 +21,7 @@
 		- [ ] ref, out 으로도 가능     
 - [최종 구현 예시](https://github.com/Gosome95/TIL/commit/299122b723581233125b9c0bc7ce6ed8527d0e5a)
 
-### 플레이어 생성하기 
+### 플레이어 생성하기 Manual
 - [ ] 최종 Goal : Player Character를 생성하는 함수 만들기 
 	- [ ] 각 직업은 스텟(stat)을 갖고 있음. 최초 시작은 `{hp, attack}`
 	- [ ] `CratePlayer 함수`를 호출하면 `{hp, attack}`이 각 직업에 맞게 채워지길 바람
@@ -73,6 +73,48 @@ CreatePlayer(choice, out player);
 - 강의 이후) 직업 포장할 때 `enum` 빨간 줄 표시 
 	-  `;`  을 붙여주는줄 알았는데   `,`  였음 
 - `CreaterPlayer()` `default`를 써주지 않으면 왜 오류?
+
+## TextRPG 몬스터 생성 Manual
+
+- [ ]  게임 접속
+- [ ]  `EnterGame()` 함수 만들기
+    - [ ]  접속메세지 띄워주기 {마을에 접속했습니다}
+    - [ ]  선택지 주기 { 필드로 가기, 로비로 돌아가서 다시 직업선택 }
+    - [ ]  사용자 입력 받기
+    - [ ]  잘 못된 값이 들어오면 다시 물어보기 (hint : `while`)
+    - [ ]  {로비로 돌아가기}를 어떻게 구현할 수 있을까?
+        - [ ]  간단하게는 return 사용
+        - [ ]  아니면 `if else if`문으로 구현
+        - 시작프로젝트 잘 못 설정해서 한참을 헤맸다…
+- [ ]  마을이나 필드로 갈 수가 있음
+- [ ]  `EnterField()` 함수 만들기
+    - [ ]  안내메세지 띄워지기 { 필드에 접속했습니다 }
+    - [ ]  랜덤으로 1~3 몬스터 중 하나를 리스폰
+        - [ ]  위에서 만든 [캐릭터 생성]과 유사하다
+        
+        ```csharp
+        Player player;
+        CreatePlayer(choice, out player);
+        /////
+        Monster monster
+        CreateRandomMonster(out Monster); 
+        ```
+        
+        - [ ]  열거형 `enum MonsterType  { None, Slime, Orc, Skeleton}`
+        - [ ]  구조체 `struct Monster { hp, attack}`
+        - [ ]  몬스터 생성 함수 `CreateRandomMonster()` 만들기
+            - [ ]  랜덤으로 몬스터 타입을 지정해서 생성
+            - [ ]  랜덤값 설정
+                - [ ]  `Random rand = new Random();`
+                - [ ]  `rand.Next(1, 4);`         포함, 제외
+            - [ ]  몬스터 변수 선언
+            - [ ]  `switch` 문 사용하여 MonsterType  할당 및 몬스터 스텟 정해주기
+                - [ ]  enum 타입이라서 (int)로 `형변환` 필요
+                - [ ]  슬라임 { 20, 2}  | 오크 { 40, 4}  |   스켈레톤 { 30. 3}
+                - [ ]  기본값 주기
+                - [ ]  **리스폰 안내 메세지 띄워주기**
+    - [ ]  [1] 을 누르면 전투모드로 돌입
+    - [ ]  [2]을 누르면 일정 확률로 마을로 도망
 
 --- 
 
