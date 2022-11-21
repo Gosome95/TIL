@@ -66,13 +66,6 @@ CreatePlayer(choice, out player);
 - `ChooseClass()` 는 조작(처리)해야 될 값이 오직 ClassType choice; 하나 뿐이라 반환이 가능했음
 - 이 경우에는 반환해야 할 값이 처음에는 { out int, out int attack } 이렇게 있고, 더 추가될 수 있으니까 구조체를 이용하여 반환하기 
 
-### 캐릭터 생성함수까지 구현해보고 막힌부분
-- 강의 직후 Manual 보면서 막혔던 부분 
-	- struct 사용 
-	- 함수 내부에서 swich case 문 사용
-- 강의 이후) 직업 포장할 때 `enum` 빨간 줄 표시 
-	-  `;`  을 붙여주는줄 알았는데   `,`  였음 
-- `CreaterPlayer()` `default`를 써주지 않으면 왜 오류?
 
 ## TextRPG 몬스터 생성 Manual
 
@@ -89,8 +82,8 @@ CreatePlayer(choice, out player);
 - [ ]  마을이나 필드로 갈 수가 있음
 - [ ]  `EnterField()` 함수 만들기
     - [ ]  안내메세지 띄워지기 { 필드에 접속했습니다 }
-    - [ ]  랜덤으로 1~3 몬스터 중 하나를 리스폰
-        - [ ]  위에서 만든 [캐릭터 생성]과 유사하다
+    - [ ]  CreateRandomMonster() 함수 만들기 
+        - [ ]  위에서 만든 `캐릭터 생성`과 유사하다
         
         ```csharp
         Player player;
@@ -102,12 +95,11 @@ CreatePlayer(choice, out player);
         
         - [ ]  열거형 `enum MonsterType  { None, Slime, Orc, Skeleton}`
         - [ ]  구조체 `struct Monster { hp, attack}`
-        - [ ]  몬스터 생성 함수 `CreateRandomMonster()` 만들기
-            - [ ]  랜덤으로 몬스터 타입을 지정해서 생성
+        - [ ]  랜덤으로 1~3 몬스터 중 하나를 리스폰
             - [ ]  랜덤값 설정
                 - [ ]  `Random rand = new Random();`
                 - [ ]  `rand.Next(1, 4);`         포함, 제외
-            - [ ]  몬스터 변수 선언
+            - [ ]  switch문 input에 해당하는 변수 선언 및 랜덤값으로 초기화
             - [ ]  `switch` 문 사용하여 MonsterType  할당 및 몬스터 스텟 정해주기
                 - [ ]  enum 타입이라서 (int)로 `형변환` 필요
                 - [ ]  슬라임 { 20, 2}  | 오크 { 40, 4}  |   스켈레톤 { 30. 3}
@@ -115,6 +107,17 @@ CreatePlayer(choice, out player);
                 - [ ]  **리스폰 안내 메세지 띄워주기**
     - [ ]  [1] 을 누르면 전투모드로 돌입
     - [ ]  [2]을 누르면 일정 확률로 마을로 도망
+
+
+### 캐릭터 생성함수까지 구현해보고 막힌부분
+- 강의 직후 Manual 보면서 막혔던 부분 
+	- 함수 내부에서 swich case 문 사용
+	- `CreaterPlayer()` `default`를 써주지 않으면 왜 오류?
+
+- [x] [`enum` 및 `struct` C# 기본문법 내용 추가](https://github.com/Gosome95/TIL/blob/main/CSharp/enum%26struct.md)
+	- struct 사용 
+	- 직업 포장할 때 `enum` 빨간 줄 표시 
+		-  `;`  을 붙여주는줄 알았는데   `,`  였음 
 
 --- 
 

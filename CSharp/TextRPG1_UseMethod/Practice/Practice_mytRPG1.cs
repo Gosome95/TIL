@@ -4,7 +4,6 @@ namespace MyApp
 {
     internal class Program
     {
-        // 직업 설정
         enum ClassType
         {
             None = 0,
@@ -12,26 +11,37 @@ namespace MyApp
             Archer = 2,
             Mage = 3
         }
-
-        struct PlayerStatus
+        struct Player
         {
             public int hp;
             public int attack;
         }
 
-        // 직업 선택창을 띄워주는 로비 함수
+        enum MonsterType
+        {
+            None = 0,
+            Slime = 1,
+            Orc = 2,
+            Skeleton = 3
+        }
+        struct Monster
+        {
+            public int hp;
+            public int attack;
+        }
+
+
         static ClassType ChooseClass()
         {
             ClassType choice = ClassType.None;
 
-            Console.WriteLine("게입에 접속하였습니다");
-            Console.WriteLine("[1] 기사");
-            Console.WriteLine("[2] 궁수");
-            Console.WriteLine("[3] 법사");
-            Console.Write("직업을 선택해주세요 : ");
-
+            Console.WriteLine("Player 클래스를 로드합니다");
+            Console.WriteLine("(1) : 기사");
+            Console.WriteLine("(2) : 궁수");
+            Console.WriteLine("(3) : 마법사");
+            Console.Write("원한는 직업을 선택해주세요 : ");
             string input = Console.ReadLine();
-            switch(input)
+            switch (input)
             {
                 case "1":
                     choice = ClassType.Knight;
@@ -45,48 +55,112 @@ namespace MyApp
             }
             return choice; 
         }
-
-        static void CreatePlayer(ClassType choice, out PlayerStatus playerStatus)
+        static void CreatePlayer(ClassType choice, out Player player)
         {
             switch(choice)
             {
                 case ClassType.Knight:
-                    playerStatus.hp = 100;
-                    playerStatus.attack = 10;
+                    player.hp = 100;
+                    player.attack = 10;
                     break;
                 case ClassType.Archer:
-                    playerStatus.hp = 75;
-                    playerStatus.attack = 12;
+                    player.hp = 90;
+                    player.attack = 12;
                     break;
                 case ClassType.Mage:
-                    playerStatus.hp = 70;
-                    playerStatus.attack = 15;
+                    player.hp = 80;
+                    player.attack = 15;
                     break;
 
                 default:
-                    playerStatus.attack = 0;
-                    playerStatus.hp = 0;
+                    player.hp = 0;
+                    player.attack = 0;
+                    break;
+            }
+
+        }
+
+        static void CreateRandomMonster(out Monster monster)
+        {
+            Random rand = new Random();
+            MonsterType monsterType = (MonsterType)rand.Next(1, 4);
+            switch (monsterType)
+            {
+                case MonsterType.Slime:
+                    monster.hp = 10;
+                    monster.attack = 1;
+                    Console.WriteLine($"몬스터가 나타났습니다 : {monsterType}");
+                    Console.WriteLine($"몬스터 Status HP :{monster.hp} | Attack :{monster.attack}");
+                    break;
+                case MonsterType.Orc:
+                    monster.hp = 20;
+                    monster.attack = 5;
+                    Console.WriteLine($"몬스터가 나타났습니다 : {monsterType}");
+                    Console.WriteLine($"몬스터 Status HP :{monster.hp} | Attack :{monster.attack}");
+                    break;
+                case MonsterType.Skeleton:
+                    monster.hp = 15;
+                    monster.attack = 7;
+                    Console.WriteLine($"몬스터가 나타났습니다 : {monsterType}");
+                    Console.WriteLine($"몬스터 Status HP :{monster.hp} | Attack :{monster.attack}");
+                    break;
+                default:
+                    monster.hp = 0;
+                    monster.attack = 0;
                     break;
             }
         }
+
+        static void EnterGame()
+        {
+            while (true)
+            {
+                Console.WriteLine("마을에 접속했습니다");
+                Console.WriteLine("[1] 필드로 가기");
+                Console.WriteLine("[2] 로비로 돌아가기");
+                Console.Write("다음 행선지를 입력해주세요 : ");
+                string input = Console.ReadLine();
+                if (input == "1")
+                {
+                    EnterField();
+                }
+                else
+                {
+                    Console.WriteLine("로비로 돌아갑니다");
+                    break;
+                }
+            }
+        }
+        static void EnterField()
+        {
+            Console.WriteLine("필드에 접속했습니다");
+            // 몬스터 생성
+            Monster monster;
+            CreateRandomMonster(out monster);
+        }
+
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
+            // 기사 궁수 마법사
             while(true)
             {
-                ClassType choice = ClassType.None;      // 변수초기화
-                choice = ChooseClass();
+                Console.WriteLine("게임에 접속했습니다");
+                // 게임접속  로비
+                ClassType choice = ChooseClass();
 
                 if(choice != ClassType.None)
                 {
-                    // Player의 직업선택
-                    PlayerStatus playerstatus;
-                    CreatePlayer(choice, out playerstatus);
-                    Console.WriteLine($"HP {playerstatus.hp}  Attack {playerstatus.attack}");
+                    Console.WriteLine($"당신의 직업은 {choice} 입니다.");      // Log 기록용
 
+                    // 캐릭터 생성
+                    Player player;
+                    CreatePlayer(choice, out player);
+                    Console.WriteLine($"현재 캐릭터 능력치 HP:{player.hp} Attack {player.attack}");
+
+                    // 마을 또는 필드 입장
+                    EnterGame(); 
                 }
-
             }
         }
     }
