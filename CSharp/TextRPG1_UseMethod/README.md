@@ -4,7 +4,7 @@
 
 ## TextRPG 만들기 메뉴얼 
 
-### 게임 로비만들기 Manual
+### 게임 로비만들기 메뉴얼
 - [ ] 최종 Goal : 직업(class) 선택할 수 있도록 로비화면을 설계하는 함수 만들기 
 - [ ] 직업 범위 안에 있는 값이 아니면 재입력을 요구할 것 
 - [ ] 직업 선택을 구현하는 부분은 하드코딩 하지 않도록 할 것 
@@ -21,7 +21,7 @@
 		- [ ] ref, out 으로도 가능     
 - [최종 구현 예시](https://github.com/Gosome95/TIL/commit/299122b723581233125b9c0bc7ce6ed8527d0e5a)
 
-### 플레이어 생성하기 Manual
+### 플레이어 생성하기 메뉴얼
 - [ ] 최종 Goal : Player Character를 생성하는 함수 만들기 
 	- [ ] 각 직업은 스텟(stat)을 갖고 있음. 최초 시작은 `{hp, attack}`
 	- [ ] `CratePlayer 함수`를 호출하면 `{hp, attack}`이 각 직업에 맞게 채워지길 바람
@@ -67,7 +67,7 @@ CreatePlayer(choice, out player);
 - 이 경우에는 반환해야 할 값이 처음에는 { out int, out int attack } 이렇게 있고, 더 추가될 수 있으니까 구조체를 이용하여 반환하기 
 
 
-## TextRPG 몬스터 생성 Manual
+## TextRPG 몬스터 생성 메뉴얼
 
 - [ ]  게임 접속
 - [ ]  `EnterGame()` 함수 만들기
@@ -108,8 +108,7 @@ CreatePlayer(choice, out player);
     - [ ]  [1] 을 누르면 전투모드로 돌입
     - [ ]  [2]을 누르면 일정 확률로 마을로 도망
 
-
-### 캐릭터 생성함수까지 구현해보고 막힌부분
+### 몬스터 생성함수까지 구현해보고 막힌부분
 - 강의 직후 Manual 보면서 막혔던 부분 
 	- 함수 내부에서 swich case 문 사용
 	- `CreaterPlayer()` `default`를 써주지 않으면 왜 오류?
@@ -118,6 +117,87 @@ CreatePlayer(choice, out player);
 	- struct 사용 
 	- 직업 포장할 때 `enum` 빨간 줄 표시 
 		-  `;`  을 붙여주는줄 알았는데   `,`  였음 
+
+## TextRPG 전투 메뉴얼
+- [ ]  `EnterField()`
+    - [ ]  while 문으로 감싸주기
+    - [ ]  [1] 전투모드 돌입 , [2] 일정확률로 마을로 도망 `안내메세지` 띄우기
+    - [ ]  사용자 입력 받기 (string input)
+    - [ ]  `if    else` 문으로 분기
+        - [ ]  여기서 `Fight()` 함수 호출
+        - 우리가 원하는 건 `player`, `monster` 가 서로 전투를 하는 것
+        - 그럴려면 함수를 호출 할 때 `player`, `monster` 정보를 알고 있어야지 서로의 체력을 깎을 수 있다 → `함수 인수와 매개변수`
+            - `monster`는 `EnterFiled` 함수 안에 존재   OK
+            - [ ]  `player` 정보는 Main에서만 지금까지 관리되고 있었음 → 길을 뚫어주자
+                - [ ]  Main 함수 - `Player player`   (원본)
+                - [ ]  `EnterGame(ref Player player)`
+                - [ ]  `EnterField(ref Player player)`
+                - [ ]  `Fight(ref Player player, ref Monster monster)`
+            - `ref` 키워를 붙여주지 않으면 계속 원본이 아니라 복사본을 갖고 작업을 한다. 그럼 정작 Main 함수 위치한 Player player 정보는 그대로임 
+             그래서 `ref`로 원본 작업할거야라고 알려주자 
+                
+- [ ]  `Fight()` 함수
+    - [ ]  while( )문으로 묶기  ← 이게 `한 턴`
+    - [ ]  플레이어가 몬스터 공격
+      `monster.hp  -= player.attack;`
+    - [ ]  if 문으로 다시 분기
+    - [ ]  `input = 1` 일때  → 전투모드
+        - [ ]  남은 체력 보여주기
+    - 힌트 코드
+        ```csharp
+        static void Fight(Player player, Monster monster)
+        {
+        	while(true)
+        	{
+        		//플레이어가 몬스터 공격
+        		monster.hp -= player.attack;
+        		if(monster.hp <= 0)
+        		{
+        			Console.WriteLine("승리했습니다");
+        			Console.Writeine($"남은 체력 : {player.hp)");
+        			break;
+        		}
+        		// 몬스터 반격
+        		player.hp -= monster.attack;
+        		if(player.hp <=0)
+        		{
+        			Console.WriteLine("패배했습니다!");
+        			break;
+        		}
+        	}
+        }
+        ```
+        
+    - [ ]  `input = 2` → 일정확률로 마을로 도망
+        - [ ]  `Radom rand  = new Random();`
+        `int randVlaue = rand.Next(0, 101);`  난수생성
+        - [ ]  `if   else` 문으로 분기
+- [ ]  코드 스타일 개선
+    ```csharp
+    - Main 함수 
+    
+    // 변경 전
+    ClassType choice = ChoooseClass();
+    if (choice != ClassType.None)
+    {
+    	// 캐릭터 생성
+    	Player player;
+    	CreatePlayer(choice, out player);
+    
+    	EnterGame(ref player);
+    }
+    
+    // 변경 후  : 중괄호 중첩을 줄일 수 있음 
+    ClassType choice = ChoooseClass();
+    if (choice == ClassType.None)
+    	continue;
+    
+    	// 캐릭터 생성
+    	Player player;
+    	CreatePlayer(choice, out player);
+    
+    	EnterGame(ref player);
+    ```
 
 --- 
 
