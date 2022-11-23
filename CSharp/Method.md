@@ -157,7 +157,7 @@ class Program
 		 
 		a = Program.AddOne2(a);            
 		Console.WriteLine(a); 
-        }
+        
     }
 }
 ```
@@ -253,7 +253,7 @@ static void Main(string[] args)
 - 반환값은 int, float 같은 기본 데이터형이 될 수 있고 사용자가 정의한 클래스 타입이 될 수 있습니다.
 - 리턴 타입에서 중요한 것은 타입을 일치시키는 부분입니다. 
 
-#### [ref 와 out](https://www.inflearn.com/questions/30171) 
+#### [ref 와 out 인프런 설명내용(inflearn)](https://www.inflearn.com/questions/30171) 
 - **Input을 받을 때 ref 나 out 을 붙이면 -> 값을 복사하는게 아니라 '실제 그 변수'를 넘기겠다** 
 - C#에서 ref를 붙이면 동작은 포인터와 유사하지만, 변수 사용 방법은 일반 (비참조형)타입과 같다 
   내부적으로는 주소값을 이용하는 포인터 형태와 동일하게 동작하여 원본에 접근하지만
@@ -276,6 +276,35 @@ static void Main(string[] args)
 - **대부분의 경우 반환형식을 int로 하는 쪽이 훨씬 좋습니다. (성능적 이슈보다는, 함수 사용 인터페이스 차원에서)**
 
 </br>
+
+### ref & out
+- 추가 기본문법 내용  
+
+```csharp
+class Program 
+{
+	static void AddOne(ref int number)    // 반환 타입 = void
+	{
+		number = number + 1; 
+	}
+	
+	static int AddOne2(int number)        // 반환 타입 = int  return 
+	{
+		retrun number + 1; 
+	}
+	
+	public static void Main(string[] args)
+	{
+		int a = 0; 
+		Program.AddOne(ref a);
+		Console.WriteLine(a);
+		 
+		a = Program.AddOne2(a);            
+		Console.WriteLine(a); 
+        
+    }
+}
+```
 
 - `Main` 함수  ➡️ `AddOne` 함수 
 - Main 함수에서 AddOne 함수로 값(인자)를 넘기는 방법 
