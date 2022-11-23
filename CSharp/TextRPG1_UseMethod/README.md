@@ -2,9 +2,9 @@
 
 > 인프런 `Rookiss`님의 [<C#과 유니티로 만드는 MMORPG게임 개발 시리즈 Part1:C#기본문법>](https://inf.run/CJG3) 내용을 보고 공부목적으로 작성한 글 입니다.
 
-## TextRPG 만들기 메뉴얼 
+# TextRPG 만들기 메뉴얼 
 
-### 게임 로비만들기 메뉴얼
+## 게임 로비만들기 메뉴얼
 - [ ] 최종 Goal : 직업(class) 선택할 수 있도록 로비화면을 설계하는 함수 만들기 
 - [ ] 직업 범위 안에 있는 값이 아니면 재입력을 요구할 것 
 - [ ] 직업 선택을 구현하는 부분은 하드코딩 하지 않도록 할 것 
@@ -21,7 +21,7 @@
 		- [ ] ref, out 으로도 가능     
 - [최종 구현 예시](https://github.com/Gosome95/TIL/commit/299122b723581233125b9c0bc7ce6ed8527d0e5a)
 
-### 플레이어 생성하기 메뉴얼
+## 플레이어 생성하기 메뉴얼
 - [ ] 최종 Goal : Player Character를 생성하는 함수 만들기 
 	- [ ] 각 직업은 스텟(stat)을 갖고 있음. 최초 시작은 `{hp, attack}`
 	- [ ] `CratePlayer 함수`를 호출하면 `{hp, attack}`이 각 직업에 맞게 채워지길 바람
@@ -68,7 +68,7 @@ CreatePlayer(choice, out player);
 
 
 ## TextRPG 몬스터 생성 메뉴얼
-
+--- 
 - [ ]  게임 접속
 - [ ]  `EnterGame()` 함수 만들기
     - [ ]  접속메세지 띄워주기 {마을에 접속했습니다}
@@ -154,10 +154,10 @@ CreatePlayer(choice, out player);
         		if(monster.hp <= 0)
         		{
         			Console.WriteLine("승리했습니다");
-        			Console.Writeine($"남은 체력 : {player.hp)");
+        			Console.Writeine($"남은 체력 : {player.hp}");
         			break;
         		}
-        		// 몬스터 반격
+        		// 몬스터 반격 
         		player.hp -= monster.attack;
         		if(player.hp <=0)
         		{
@@ -165,13 +165,14 @@ CreatePlayer(choice, out player);
         			break;
         		}
         	}
-        }
+		}
         ```
         
     - [ ]  `input = 2` → 일정확률로 마을로 도망
         - [ ]  `Radom rand  = new Random();`
         `int randVlaue = rand.Next(0, 101);`  난수생성
         - [ ]  `if   else` 문으로 분기
+		- [ ]  확률은 33%  (`randVlaue ≤ 33`)
 - [ ]  코드 스타일 개선
     ```csharp
     - Main 함수 
@@ -192,11 +193,11 @@ CreatePlayer(choice, out player);
     if (choice == ClassType.None)
     	continue;
     
-    	// 캐릭터 생성
-    	Player player;
-    	CreatePlayer(choice, out player);
-    
-    	EnterGame(ref player);
+	// 캐릭터 생성
+	Player player;
+	CreatePlayer(choice, out player);
+
+	EnterGame(ref player);
     ```
 
 --- 
