@@ -220,7 +220,7 @@ CreatePlayer(choice, out player);
     - `EnterGame` 
       `EnterField`
       `Fight`
-    - [ ]  왜 다  `out` 이 아니라 `ref` 로 썼지?
+    - [x]  왜 다  `out` 이 아니라 `ref` 로 썼지? ➡️ [보충내용](https://github.com/Gosome95/TIL/blob/main/CSharp/Method_RefBook.md)
     - `out` 키워드를 사용하면 그 매개변수를 함수 안에서 반드시 사용해야함 
     `CS0177: 제어가 현재 메서드를 벗어나기 전에 ‘player’ out 매개 변수를 할당해야 합니다`
     - EnterGame, EnterField에서 **굳이** `player` 변수를 초기화까지 해줄 구간이 없음

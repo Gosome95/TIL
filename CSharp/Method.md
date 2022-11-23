@@ -278,7 +278,7 @@ static void Main(string[] args)
 </br>
 
 ### ref & out
-- 추가 기본문법 내용  
+- [추가 기본문법 내용](https://github.com/Gosome95/TIL/blob/main/CSharp/Method_RefBook.md)  
 
 ```csharp
 class Program 
