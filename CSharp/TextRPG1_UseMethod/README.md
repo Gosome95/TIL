@@ -108,16 +108,6 @@ CreatePlayer(choice, out player);
     - [ ]  [1] 을 누르면 전투모드로 돌입
     - [ ]  [2]을 누르면 일정 확률로 마을로 도망
 
-### 몬스터 생성함수까지 구현해보고 막힌부분
-- 강의 직후 Manual 보면서 막혔던 부분 
-	- 함수 내부에서 swich case 문 사용
-	- `CreaterPlayer()` `default`를 써주지 않으면 왜 오류?
-
-- [x] [`enum` 및 `struct` C# 기본문법 내용 추가](https://github.com/Gosome95/TIL/blob/main/CSharp/enum%26struct.md)
-	- struct 사용 
-	- 직업 포장할 때 `enum` 빨간 줄 표시 
-		-  `;`  을 붙여주는줄 알았는데   `,`  였음 
-
 ## TextRPG 전투 메뉴얼
 - [ ]  `EnterField()`
     - [ ]  while 문으로 감싸주기
@@ -199,6 +189,41 @@ CreatePlayer(choice, out player);
 
 	EnterGame(ref player);
     ```
+### 헷갈렸던 부분 & 막힌부분
+- 강의 직후 Manual 보면서 막혔던 부분 
+	- 함수 내부에서 swich case 문 사용
+	- `CreaterPlayer()` `default`를 써주지 않으면 왜 오류?
+
+- [x] [`enum` 및 `struct` C# 기본문법 내용 추가](https://github.com/Gosome95/TIL/blob/main/CSharp/enum%26struct.md)
+	- struct 사용 
+	- 직업 포장할 때 `enum` 빨간 줄 표시 
+		-  `;`  을 붙여주는줄 알았는데   `,`  였음 
+
+</br>
+
+- [ ]  `static void CreatePlayer(ClassType choice, out Player player)` 
+        `CreatePlayer(choice, out player);`
+    - [ ]  `choice`는 여기서 `ref`나 `out` 으로 넘겨주지 않던가?
+    - 여기서 `choice`를 `ref` 나 `out` 으로 넘겨주지 않으면  **값 복사**가 일어남
+    - 그럼 우리는 `원본`으로 작업하기를 바라는가?
+    - `choice` 는 어차피  0, 1 ,2 , 3 같은 숫자(정수)가 입력되어 있고 우리가 함수 안에서 `switch`문에서 필요한 정보도 이 값만 있으면 됨. **실제 원본 데이터를 조작할 일은 없음** → 그럼 굳이 원본을 이용해서 작업할 필요는 없음
+- [ ]  `CreateMonster` 에서 `out`  키워드 사용 하던가?
+    - `Monster monster` 로 `구조체`를 이용했음
+    - 구조체는 기본적으로 `값 형식` - 스택 할당.
+    - 그런데 우리는 진짜 monster hp `원본`을 갖고 작업하기를 바람
+        - 붙이지 않으면 처음에 호출하는 `EnterField()` 함수 안에서 선언된 `Monster monster` 사본으로 값을 넘기게 됨
+        - `CreateMonster()` 함수는 전달받은 인수 `monster` 를 `복사`한 값을 매개변수로 이용하여 작업
+        - 실제 CreateMonster함수를 호출한 위치인  `EnterField()` 에서 우리가 조작하는 `monster` 변수는 값이 그대로임
+    - 그러니까 `out` 키워드 사용
+- [ ]  `Fight` 함수 에서 매개변수 키워드  ref,  out??
+    - `ref` 로 하면 안되나?
+    - `EnterGame` 
+      `EnterField`
+      `Fight`
+    - [ ]  왜 다  `out` 이 아니라 `ref` 로 썼지?
+    - `out` 키워드를 사용하면 그 매개변수를 함수 안에서 반드시 사용해야함 
+    `CS0177: 제어가 현재 메서드를 벗어나기 전에 ‘player’ out 매개 변수를 할당해야 합니다`
+    - EnterGame, EnterField에서 **굳이** `player` 변수를 초기화까지 해줄 구간이 없음
 
 --- 
 
