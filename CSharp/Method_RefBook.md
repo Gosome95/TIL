@@ -1,7 +1,6 @@
 # Method 문법책 보충 내용 
 
->  Book [Manami Kitamura: Unity Textbook 5th Edition](http://aladin.kr/p/jfZpf) 
-   Book [박상현 : 이것이 C#이다](http://aladin.kr/p/YysOb)
+>  Book [Manami Kitamura: Unity Textbook 5th Edition](http://aladin.kr/p/jfZpf) </br> Book [박상현 : 이것이 C#이다](http://aladin.kr/p/YysOb)
 
 --- 
 

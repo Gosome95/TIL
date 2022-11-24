@@ -68,7 +68,6 @@ CreatePlayer(choice, out player);
 
 
 ## TextRPG 몬스터 생성 메뉴얼
---- 
 - [ ]  게임 접속
 - [ ]  `EnterGame()` 함수 만들기
     - [ ]  접속메세지 띄워주기 {마을에 접속했습니다}
@@ -215,12 +214,12 @@ CreatePlayer(choice, out player);
         - `CreateMonster()` 함수는 전달받은 인수 `monster` 를 `복사`한 값을 매개변수로 이용하여 작업
         - 실제 CreateMonster함수를 호출한 위치인  `EnterField()` 에서 우리가 조작하는 `monster` 변수는 값이 그대로임
     - 그러니까 `out` 키워드 사용
-- [ ]  `Fight` 함수 에서 매개변수 키워드  ref,  out??
+- [x]  `Fight` 함수 에서 매개변수 키워드  ref,  out?? ➡️ [보충내용](https://github.com/Gosome95/TIL/blob/main/CSharp/Method_RefBook.md)
     - `ref` 로 하면 안되나?
     - `EnterGame` 
       `EnterField`
       `Fight`
-    - [x]  왜 다  `out` 이 아니라 `ref` 로 썼지? ➡️ [보충내용](https://github.com/Gosome95/TIL/blob/main/CSharp/Method_RefBook.md)
+    - [x]  왜 다  `out` 이 아니라 `ref` 로 썼지? 
     - `out` 키워드를 사용하면 그 매개변수를 함수 안에서 반드시 사용해야함 
     `CS0177: 제어가 현재 메서드를 벗어나기 전에 ‘player’ out 매개 변수를 할당해야 합니다`
     - EnterGame, EnterField에서 **굳이** `player` 변수를 초기화까지 해줄 구간이 없음
