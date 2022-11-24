@@ -198,6 +198,27 @@ CreatePlayer(choice, out player);
 	- 직업 포장할 때 `enum` 빨간 줄 표시 
 		-  `;`  을 붙여주는줄 알았는데   `,`  였음 
 
+- [x] ClassType은 enum 형태로, Player Stat {hp, attack}은 sturct 형태로 구현한 이유?
+	- ClassType은 Knight, Archer, Mage 같은 `직업 종류`를 묶어준다. 직업Class Type이라는 범주 안에서 <u>**Class(직업)를 말 그대로 나열한 형태로 사용**</u>
+	- 실제 ClassType 안에 들어있는 데이터 {0, 1, 2, 3}을 건드릴 일이 없다
+	- 반면에 각 직업 안에 들어가는 스텟(stat)정보 `{hp, attack}`은 <u>**직접 데이터를 집어넣어서 조작이 필요**</u>하다
+	- [Reference_enum & struct in MyGitHub](https://github.com/Gosome95/TIL/blob/main/CSharp/enum%26struct.md)
+	- [Inflearn 질문 : 구조체는 어느 상황에 쓰이나요?](https://inflearn.com/questions/175799)
+		- 열거형은 문자열, 정수 모두 됩니다.
+		기본적으로 `열거형`은 1, 2, 3에 Orc, Skeleton, Slime같은 이름을 지어주는 셈이지 **자체로 데이터를 묶어서 관리하는 개념은 아닙니다.**
+		반면 `struct`는 **진짜 데이터를 묶어서 관리**할 수 있게 해주는데
+		가령 `hp`, `mp` 및 `기타 스탯`을 따로 따로 관리하기 보다는
+		묶어서 관리할 수 있습니다 
+			```cs
+			struct StatInfo
+			{
+			int hp;
+			int mp;
+			int strength;
+			int dexterity;
+			}
+			```
+
 </br>
 
 - [ ]  `static void CreatePlayer(ClassType choice, out Player player)` 

@@ -1,7 +1,7 @@
 # 열거형식(Enumerator)과 구조체(Structure)
 
-> 책 <이것이C#이다> 를 참고하였습니다 
-> **`mytRPG1_CreatePlayer()`함수까지 구현해보면서 헷갈렸던 [enum 및 sturct] 이론 부분 추가** 
+> 책 [박상현 : 이것이 C#이다](http://aladin.kr/p/YysOb) 를 참고하였습니다 </br> 
+> 인프런 `Rookiss`님의 [<C#과 유니티로 만드는 MMORPG게임 개발 시리즈 Part1:C#기본문법>](https://inf.run/CJG3) 내용을 보고 공부목적으로 작성한 글 입니다.
 
 ## 상수(Constants)와 열거형식(Enumerator)
 
@@ -128,13 +128,69 @@ player2 {80, 10}
 ### [코드](https://github.com/Gosome95/TIL/blob/main/CSharp/TextRPG1_UseMethod/TextRPG1_02_MakePlayer.cs)에서 열겨형식과 구조체 
 > **ClassType은 enum 형태로, Player Stat {hp, attack}은 sturct 형태로 구현한 이유?**
 
-- ClassType은 Knight, Archer, Mage 같은 `직업 종류`를 묶어준다. 직업Class Type이라는 범주 안에서 <u>**Class를 말 그대로 나열한 형태로 사용**</u>
+- ClassType은 Knight, Archer, Mage 같은 `직업 종류`를 묶어준다. 직업Class Type이라는 범주 안에서 <u>**Class(직업)를 말 그대로 나열한 형태로 사용**</u>
 - 실제 ClassType 안에 들어있는 데이터 {0, 1, 2, 3}을 건드릴 일이 없다 
 - 반면에 각 직업 안에 들어가는 스텟(stat)정보 `{hp, attack}`은 <u>**직접 데이터를 집어넣어서 조작이 필요**</u>하다 
+- [Inflearn 질문 : 구조체는 어느 상황에 쓰이나요?](https://inflearn.com/questions/175799)
+	- 열거형은 문자열, 정수 모두 됩니다.
+		기본적으로 `열거형`은 1, 2, 3에 Orc, Skeleton, Slime같은 이름을 지어주는 셈이지 **자체로 데이터를 묶어서 관리하는 개념은 아닙니다.**
+		반면 `struct`는 **진짜 데이터를 묶어서 관리**할 수 있게 해주는데
+		가령 `hp`, `mp` 및 `기타 스탯`을 따로 따로 관리하기 보다는
+		묶어서 관리할 수 있습니다 
+		```cs
+		struct StatInfo
+		{
+		int hp;
+		int mp;
+		int strength;
+		int dexterity;
+		}
+		```
+## Struct 와 Class 
+| 특징 | 클래스(Class) | 구조체(Structure) |
+| ------------- | ------------------------------ | -------------------------------- |
+| 키워드 | class | struct |
+| 형식 | 참조 형식<br>(힙에 할당) | 값 형식<br>(스택에 할당) |
+| 복사 | 얕은 복사<br>Shallow Copy | 깊은 복사<br>Deep Copy |
+| 인스턴스 생성 | new 연산자와 생성자 필요 | 선언만으로도 생성 |
+| 생성자 | 매개변수 없는 생성자 선언 가능 | 매개변수 없는 생성자 선언 불가능 |
+| 상속 | 가능 | 값 형식이므로 상속 불가능 |
+
+-   class = 참조로 해서 값을 넘김
+    -   쉽게 말해서 그냥 계속 ref로 작업하는 셈
+    -  `class`는 참조 타입이라, `ref` 없이도 자체적으로 원본을 대상으로 연산
+
+#### [C++ C# stuct 비교](https://inflearn.com/questions/139848)
+`C++`에서 `C#`으로 넘어올 땐 한가지만 기억하면 편합니다.
+`C#`의 `struct`는 `C++`의 `struct`처럼 <u>**복사**</u>가 되고,
+`C#`의 `class`는 `C++`로 치면 항상 `*(pointer)`를 함축하고 있다고 생각하시면 됩니다.
+`C# : struct Knight ->    C++ : Knight 복사`
+`C# : class Knight -> C++ : Knight* or Knight&`
+
+- **Struct 도 내부에 함수 생성이 가능한가요?**
+	`struct`에서도 문법적으로 멤버 함수 사용이 가능하지만 , 그렇게 하는 경우는 사실상 없습니다.
+	C++에서는 struct / class 차이가 아주 미세하지만 `C#`에서는 기본적으로 `복사/참조 타입`이라는 어마어마한 차이가 있기 때문에 `객체`를 만들 때 무조건 `class`를 활용하게 되기 때문입니다.
+	`Program` 내부에서 `static`으로 만들어도 물론 똑같이 동작하게 만들 수 있지만,
+	나중에 프로그램이 커지면 코드가 30만줄 단위를 넘어가기도 합니다.
+	<u>**특별한 경우가 아니라면 관련 있는 애들끼리 모아놓는게 관리 차원에서 좋습니다.**</u>
+
+ #### [얕은 복사, 깊은 복사](https://inflearn.com/questions/175799) 
+- **새로운 객체를 만들어서 값을 다시 정해주는 것** ➡️ 깊은 복사 (`Deep Copy`)
+- **동일한 주소(객체)를 참조하는 것(<u>카피하는 척!</u> 만 하는 느낌)** ➡️ 얕은 복사(`Shallow Copy`) 
+</br>
+
+- 둘다 복사를 하고 싶은 것인데 `얕은 복사`는 <u>메모리에 있는 데이터를</u> `그대로 복붙`만 한 셈이 됩니다. 
+- 그런데 `참조형` 같은 경우에는 메모리 데이터를 그대로 복붙하면 같은 `객체를 참조`하게 됩니다. 
+- 가령 Player가 내부적으로 `Inventory`를 갖고 있는 상태에서, 해당 Player를 그대로 복사하면 2 Player가 동일한 Inventory를 공유한다는 의미가 되는데 살짝 이상한 상황이겠죠. 
+- 따라서 `깊은 복사`를 할 때는 `메모리 데이터 복붙`을 하는게 아니라 정말 객체의 복사가 의미하는 바를 실행한다고 생각하시면 됩니다.
+- <u>일반적인 상황에서는 메모리 값 그대로만 복사하는 것은 의미가 없기 때문에 얕은 복사가 안 되고 깊은 복사를 해야 합니다.</u>
+- 하지만 정말 상관없는 경우도 있겠죠. Inventory는 없고 `int hp, int attack` 같은 <u>평범한 정수 수치</u>만 갖고 있다면 그냥 그대로 메모리 값만 복사하면 하면 됩니다.
+- 그리고 경우에 따라 Inventory 같은 참조값을 공유해도 딱히 상관없는 경우도 생기는데 예를 들어 Marine 클래스가 `Marine 공방업 정보`를 별도의 참조값으로 들고 있다면, 이 값은 모든 Marine들이 공통적으로 들고 있어도 되니 상관없을 겁니다.
 
 --- 
 
 ## 추후 업데이트할 내용 
 - [ ]  구조체, 열거형  노트를 추가했다  내용을 보다보니 
 깊은 복사, 얕은 복사가 헷갈린다  — 관련 내용 추가 필요
-- [ ]  관련해서 ref, out 키워드도 C# 기본문법 보고 내용 추가 필요
+- [x] 관련해서 ref, out 키워드도 C# 기본문법 보고 내용 추가 필요
+	➡️ [C# 기본문법 ref, out 내용 추가](https://github.com/Gosome95/TIL/blob/main/CSharp/Method_RefBook.md#%EA%B0%92%EC%97%90-%EC%9D%98%ED%95%9C-%EC%A0%84%EB%8B%AC-pass-by-value) 
