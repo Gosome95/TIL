@@ -1,83 +1,76 @@
 using System;
-using System.Numerics;
 
-namespace MyApp
+namespace MyApp 
 {
     internal class Program
     {
-        //Add enum
         enum ClassType
         {
             None = 0,
             Knight = 1,
             Archer = 2,
-            Mage = 3
+            Mage = 3 
         }
-
-        // ADD struct
         struct Player
         {
-            // Basic stat(Variable Statistics)
-            // Add access modifier(접근 한정자)
             public int hp;
             public int attack;
-            // public ClassType type;   // Optional 
         }
 
-        // about Monster
         enum MonsterType
         {
             None = 0,
             Slime = 1,
             Orc = 2,
-            Skeleton = 3
+            Skleton = 3
         }
         struct Monster
         {
             public int hp;
-            public int attack; 
+            public int attack;
         }
 
-        // Add [Choose class]Method
+
         static ClassType ChooseClass()
         {
-            Console.WriteLine("직업을 선택하세요!");
+            ClassType choice = ClassType.None;
+            Console.WriteLine("환영합니다!");
             Console.WriteLine("[1] 기사");
             Console.WriteLine("[2] 궁수");
             Console.WriteLine("[3] 법사");
-
-            ClassType choice = ClassType.None;
+            Console.Write(" : ");
             string input = Console.ReadLine();
-            switch (input)
+            switch(input)
             {
                 case "1":
                     choice = ClassType.Knight;
+                    Console.WriteLine("당신의 선택은 [기사] 입니다");
                     break;
                 case "2":
                     choice = ClassType.Archer;
+                    Console.WriteLine("당신의 선택은 [기사] 입니다");
                     break;
                 case "3":
                     choice = ClassType.Mage;
+                    Console.WriteLine("당신의 선택은 [기사] 입니다");
                     break;
             }
             return choice;
         }
-
-        // Add [Create Player] Method
         static void CreatePlayer(ClassType choice, out Player player)
         {
-            switch (choice)
+            switch(choice)
             {
                 case ClassType.Knight:
                     player.hp = 100;
                     player.attack = 10;
                     break;
                 case ClassType.Archer:
-                    player.hp = 75;
+                    player.hp = 70;
                     player.attack = 12;
                     break;
                 case ClassType.Mage:
-                    player.hp = 50;
+                    player.hp = 60;
                     player.attack = 15;
                     break;
                 default:
@@ -85,95 +78,127 @@ namespace MyApp
                     player.attack = 0;
                     break;
             }
-
         }
 
         // input[EnterFiled] -> Create Monster
-        static void CreateRandomMonster(out Monster monster)
+        static void CreateMonster(out Monster monster)
         {
             Random rand = new Random();
-            int input = rand.Next(1, 4);
-
-            switch(input)
+            MonsterType randMonsterType = (MonsterType)rand.Next(1, 4);
+            switch(randMonsterType)
             {
-                case (int)MonsterType.Slime:
-                    monster.hp = 20;
-                    monster.attack = 2;
-                    Console.WriteLine("슬라임이 생성되었습니다");
+                case MonsterType.Slime:
+                    monster.hp = 15;
+                    monster.attack = 10;
+                    Console.WriteLine("몬스터가 리스폰되었습니다");
+                    Console.WriteLine($"슬라임 HP:{monster.hp}  Attack:{monster.attack}");
                     break;
-                case (int)MonsterType.Orc:
-                    monster.hp = 40;
-                    monster.attack = 4;
+                case MonsterType.Orc:
+                    monster.hp = 15;
+                    monster.attack = 10;
+                    Console.WriteLine($"오크 HP:{monster.hp}  Attack:{monster.attack}");
                     break;
-                case (int)MonsterType.Skeleton:
-                    monster.hp = 30;
-                    monster.attack = 3;
-                    Console.WriteLine("오크가 생성되었습니다");
+                case MonsterType.Skleton:
+                    monster.hp = 15;
+                    monster.attack = 10;
+                    Console.WriteLine($"스켈레톤 HP:{monster.hp}  Attack:{monster.attack}");
                     break;
                 default:
                     monster.hp = 0;
                     monster.attack = 0;
-                    Console.WriteLine("스켈레톤이 생성되었습니다");
                     break;
             }
-
         }
 
-        // [Enter the Game] Method
-        static void EnterGame()
+        static void Fight(ref Player player, ref Monster monster)
         {
             while (true)
             {
-                Console.WriteLine("마을에 접속했습니다!");
-                Console.WriteLine("[1] 필드로 가기");
-                Console.WriteLine("[2] 로비로 돌악가기");
-                Console.Write("갈 곳을 정해주세요 : ");
-
-                string input = Console.ReadLine();
-                if (input == "1")
+                monster.hp -= player.attack;
+                Console.WriteLine($"몬스터에게 {player.attack} 데미지를 입혔습니다");
+                if (monster.hp <= 0)
                 {
-                    EnterField();
+                    Console.WriteLine("전투 승리");
+                    Console.WriteLine($"현재 체럭 {player.hp}");
+                    break;
                 }
-                else if (input == "2")
+
+                player.hp -= monster.attack;
+                Console.WriteLine($"몬스터에게 {monster.attack} 데미지를 입혔습니다");
+                if (player.hp <= 0)
                 {
+                    Console.WriteLine("전투에 패배했습니다");
+                    Console.WriteLine("마을로 돌아갑니다");
                     break;
                 }
             }
+
         }
 
-        // Enter Field Mehtod 
-        static void EnterField()
+        static void EnterField(ref Player player)
         {
-            Console.WriteLine("필드에 들어왔습니다!");
-            Monster monster;
-            CreateRandomMonster(out monster);
-            Console.WriteLine($"Monster's HP {monster.hp} Monster's Attack {monster.attack}");
+            Console.WriteLine("필드에 입장하였습니다");
+            while(true)
+            {
+                Monster monster;
+                CreateMonster(out monster);
+                Console.WriteLine("전투가 시작됩니다");
+                // Fight ()
+                Fight(ref player, ref monster);
+                if (player.hp > 0)
+                {
+                    Console.WriteLine("계속 사냥하시겠습니까?");
+                    Console.Write(" : ");
+                    string input = Console.ReadLine();
+                    if (input == "1")
+                        continue;
+                    else if (input == "2")
+                        break;
+                }
+                else
+                    break;
+            }
+
+        }
+        static void EnterGame(ref Player player)
+        {
+            while(true)
+            {
+                Console.WriteLine("마을에 접속했습니다");
+                Console.WriteLine("[1] 필드로 가기");
+                Console.WriteLine("[2] 로비로 돌아가기");
+                string input = Console.ReadLine();
+                Console.Write(" : ");
+
+                if(input == "1")
+                {
+                    Console.WriteLine("필드로 갑니다");
+                    EnterField(ref player);
+                }
+                else if(input == "2")
+                {
+                    Console.WriteLine("로비로 돌아갑니다");
+                    break; 
+                }
+            }
         }
 
         static void Main(string[] args)
         {
-            while (true)
+            while(true)
             {
-                // init(initialization) enum
-                // call the method
                 ClassType choice = ChooseClass();
+                if (choice == ClassType.None)
+                    continue;
+                // [Captial Player]User-defined type = sturct Player 
+                // [Small player] variavle name
+                // Call the Make Player's Character Method
+                Player player;
+                CreatePlayer(choice, out player);
 
-                // choice = Player Input 
-                if (choice != ClassType.None)
-                {
-                    // [Captial Player]User-defined type = sturct Player 
-                    // [Small player] variavle name
-                    Player player;
-                    // Call the Make Player's Character Method
-                    CreatePlayer(choice, out player);
+                EnterGame(ref player);
 
-                    Console.WriteLine($"Player's HP {player.hp} Player's Attack {player.attack}");
-
-                    EnterGame(); 
-
-                }
             }
-
         }
     }
 }
