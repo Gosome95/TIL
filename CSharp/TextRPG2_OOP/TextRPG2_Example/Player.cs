@@ -14,40 +14,36 @@ namespace TextRPG2_Example
     }
     class Player
     {
-        protected PlayerType type = PlayerType.None;
-        protected int hp = 0;
-        protected int attack = 0;
+        protected PlayerType _type = PlayerType.None;
+        protected int _hp = 0;
+        protected int _attack = 0;
         protected Player(PlayerType type)
         {
-            this.type = type;
+            _type = type;
         }
 
-        // 외부접근용 은닉성! 
         public void SetInfo(int hp, int attack)
         {
-            this.hp = hp;
-            this.attack = attack;
+            _hp = hp;
+            _attack = attack;
         }
-        public PlayerType GetPlayerType() {return type;}
-        public int GetHP() {return hp;}
-        public int GetAttack() {return attack;}
-        public bool IsDead(){ return hp <= 0;}
+        public PlayerType GetPlayerType() { return _type;}
+        public int GetHP() { return _hp; }
+        public int GetAttack() { return _attack; }
+        public bool IsDead() { return _hp <= 0;}
         public void OnDamaged(int damage)
         {
-            hp -= damage;
-            if(hp < 0)
-                hp = 0;
+            _hp -= damage;
+            if(_hp < 0)
+                _hp = 0;
         }
-        
     }
-
     class Knight : Player
     {
         public Knight() : base(PlayerType.Knight)
         {
             SetInfo(100, 10);
         }
-
     }
     class Archer : Player
     {
@@ -62,6 +58,5 @@ namespace TextRPG2_Example
         {
             SetInfo(60, 15);
         }
-
     }
 }
