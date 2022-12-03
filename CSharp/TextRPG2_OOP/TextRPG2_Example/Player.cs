@@ -15,8 +15,8 @@ namespace TextRPG2_Example
     class Player
     {
         protected PlayerType _type = PlayerType.None;
-        protected int _hp = 0;
-        protected int _attack = 0;
+        protected int _hp;
+        protected int _attack;
         protected Player(PlayerType type)
         {
             _type = type;
@@ -27,10 +27,10 @@ namespace TextRPG2_Example
             _hp = hp;
             _attack = attack;
         }
-        public PlayerType GetPlayerType() { return _type;}
+        public PlayerType GetPlayerType() { return _type; }
         public int GetHP() { return _hp; }
         public int GetAttack() { return _attack; }
-        public bool IsDead() { return _hp <= 0;}
+        public bool IsDead() { return _hp <= 0; }
         public void OnDamaged(int damage)
         {
             _hp -= damage;
@@ -38,25 +38,26 @@ namespace TextRPG2_Example
                 _hp = 0;
         }
     }
+
     class Knight : Player
     {
-        public Knight() : base(PlayerType.Knight)
+        public Knight() :base(PlayerType.Knight)
         {
             SetInfo(100, 10);
         }
     }
-    class Archer : Player
+     class Archer : Player
     {
-        public Archer() : base(PlayerType.Archer)
+        public Archer() :base(PlayerType.Archer)
         {
             SetInfo(75, 12);
         }
     }
-    class Mage : Player
+     class Mage : Player
     {
-        public Mage() : base(PlayerType.Mage)
+        public Mage() :base(PlayerType.Mage)
         {
             SetInfo(60, 15);
         }
-    }
+    }                  
 }
