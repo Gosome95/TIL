@@ -12,32 +12,15 @@ namespace TextRPG2_Example
         Archer = 2,
         Mage = 3
     }
-    class Player
+    class Player : Creature
     {
-        protected int _hp = 0;
-        protected int _attack = 0;
         protected PlayerType _type = PlayerType.None;
-
-        protected Player(PlayerType type)
+        protected Player(PlayerType type) : base(CreatureType.Player)
         {
             _type = type;
         }
 
-        protected void SetInfo(int hp, int attack)
-        {
-            _hp = hp;
-            _attack = attack;
-        }
         public PlayerType GetPlayerType(){ return _type; }
-        public int GetHP(){ return _hp; }
-        public int GetAttack(){ return _attack; }
-        public bool IsDead() { return _hp <= 0; }
-        public void OndDamaged(int damage)
-        {
-            _hp -= damage;
-            if (_hp < 0)
-                _hp = 0;
-        }
     }
 
     class Knight : Player
