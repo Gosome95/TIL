@@ -59,3 +59,122 @@
 - [ ]  `자식 클래스` 각 직업별로 능력치 넣어주기
     - [ ]  `SetInfo` 함수 사용
     `SerInfo(100, 10);`
+
+## TextRPG2 - 몬스터 생성
+### `Creature` `클래스`를 추가
+
+- [ ]  `Player` 클래스와 `Monster` 클래스가 갖는 공통적인 기능과 속성을 관리 
+  코드 재사용을 위해서
+
+```csharp
+protected int hp = 0;
+protected int attack  = 0;
+
+public void SetInfo(int hp, int attack)
+{
+    this.hp = hp;
+    this.attack = attack;
+}
+
+public int GetHP() { return hp; }
+public int GetAttack() { return attack; }
+public bool IsDead() { return hp <= 0; }
+public void OnDamaged(int damage)
+{
+    hp -= damage;
+    if (hp < 0)
+        hp = 0;
+}
+```
+
+- [ ]  `Creature` 클래스가 `Player` 인지 `Monster`인지 알아야 하니까 `구조체` `enum` 추가
+
+```csharp
+public enum CreatureType
+{
+	None,
+	Player = 1,
+	Monster = 2
+}
+```
+
+- [ ]  class `Creature` 에서 구조체 관련 함수 설정
+
+```csharp
+CreatureType type;
+
+protected Creature(CreatureType type)
+{
+	this.type = type;
+}
+```
+
+- [ ]  `Creature Type`을 `Get 함수`로 외부접근 할 수 있게 해주기
+- [ ]  `상속` 해주기
+
+```mermaid
+graph TD
+  Creature --> Player --> Knight
+	Creature --> Monster
+	Player --> Archer
+	Player --> Mage
+	Monster --> Slime
+	Monster --> Orc
+	Monster --> Skeleton
+```
+
+- [ ]  `Player` `생성자`에서 `base`키워드 설정하여 인자 설정하기
+
+```csharp
+protected Player(PlayerType type) : base(CreatureType.Player)
+{
+    this.type = type;
+}
+```
+
+### `Mosnter` class 설계
+
+- [ ]  `MosnterType` 구조체 설정
+    
+    ```csharp
+    public enum MonsterType
+    {
+    	None = 0,
+      Slime = 1,
+      Orc = 2,
+      Skeleton = 3
+    }
+    ```
+    
+- [ ]  `Monster` 클래스 내 구조체를 인자로 받는 `생성자` 설정
+- [ ]  Player 클래스와 마찬가지로 `GetMonsterType` 설정
+- [ ]  `Slime`, `Orc`, `Skeleton` 각각의 `클래스`를 만들어준다
+    - [ ]  `생성자`도 추가
+- [ ]  `SetInfo`로 수치를 적용해주자
+
+### `Main` 에서 사용
+
+```csharp
+Player player = new Knight();
+Monster monster = new Orc();
+```
+
+- [ ]  플레이어가 몬스터를 공격하는 코드 작성 후 디버깅
+
+```csharp
+int damage = player.GetAttack();
+monster.OnDamaged(damage);
+// player한테 맞았는지가 중요하다 하면 OnDamaged 함수 수정해서 크리처타입 넣어주기 
+```
+
+- [ ]  `객체지향`이니까 조립해서 다른 기능도 가능
+    - [ ]  `PvP` 기능
+    
+    ```csharp
+    Player player = new Knight();
+    Monster monster = new Orc();
+    
+    Player player2 = new Archer(); 
+    int damage = player.GetAttack();
+    player2.OnDamaged(damage); 
+    ```
