@@ -178,3 +178,145 @@ monster.OnDamaged(damage);
     int damage = player.GetAttack();
     player2.OnDamaged(damage); 
     ```
+## TextRPG2 게임진행 
+- [ ]  `Game` 이라는 `클래스`로 관리
+    - [ ]  Game Manager 역할
+    - [ ]  구조체 `enum`으로 `게임모드` 나누기 { `로비입장`, `마을입장`, `필드입장`}  세가지 경우의 수
+    
+    ```csharp
+    public enum GameMode
+    {
+    	None,
+    	Lobby, 
+    	Town,
+    	Field
+    }
+    ```
+    
+
+### class Game
+
+- [ ]  구조체 변수 선언
+    - [ ]  `GameMode.None` 으로 설정할 시, 아무 모드도 선택되지 않아서 아무런 동작을 하지 않음
+    Set 함수로 설정해도 되지만 여기서는 처음 모드 시작을 `Lobby`로 강제 설정
+    
+    ```csharp
+    private GameMode mode = GameMode.Lobby;
+    ```
+    
+- [ ]  `Process 메소드` 만들기
+    - [ ]  `switch` 문을 이용한 `mode` 분기
+    
+    ```csharp
+    public void Process()
+    {
+    	switch (mode)
+    	{
+    		case GameMode.Lobby;
+    			ProcessLobby();
+    			break;
+    		case GameMode.Town;
+    			ProcessTown();
+    			break;
+    		case GameMode.Field:
+    			ProcessField();
+    			break;
+    	} 
+    }
+    ```
+    
+
+### `switch` 문 안에서 실행될 각가의 `모드(mode) 메서드` 만들어주기
+
+#### `public void ProcessLobby( )` 
+
+```csharp
+Console.WriteLine("환영합니다 OOO World 입니다");
+Console.WriteLine("[1] 기사");
+Console.WriteLine("[2] 궁수");
+Console.WriteLine("[3] 마법사");
+Console.Write("직업을 선택해주세요 : ");
+
+string input = Console.ReadLine();
+```
+
+- [ ]  다시 이제 `switch` 문을 활용하여 분기를 해준다
+    
+    ```csharp
+    switch(input)
+    {
+      case "1":
+          // new Knight();
+          Console.WriteLine("당신의 직업은 [기사] 입니다");
+          break;
+    }
+    ```
+    
+- [ ]  이 switch 분기 안에서  `Knight, Archer, Mage` 각각의 Player `객체`를 생성해주면 User 입력에 따라서 직업 선택이 가능
+- [ ]  그런데 굳이 여기서 `Player`를 `스택메모리` (함수) 안에다가 만들어줄 필요가 있을까 → 없다!
+- [ ]  **함수 안에서 선언이 아니라 클래스 `Game` 안에다가 `Player`를 선언해주자**
+
+```csharp
+private Player player = null;
+// Player 가 어떤 타입일지 모르니까 player 타입으로 받음 
+```
+
+- [ ]  다시 이제 `switch` 문을 활용하여 분기를 해준다
+    - [ ]  `Knight, Archer, Mage` 생성
+    - [ ]  `while`문으로 감싸지 않고, `GameMode`로 관리해서 옳바른 값이 입력되면 바로 `다음 모드`로 넘어갈 수 있도록
+
+```csharp
+switch(input)
+{
+	case "1":
+	player = new Knight();
+		mode = GameMode.Town;
+		break;
+	case "2":
+		player = new Archer();
+		mode = GameMode.Town;
+	break;
+	case "3":
+		player = new Mage();
+		mode = GameMode.Town;
+	break;
+}
+```
+
+#### `ProcessTown()` 함수 만들기 
+
+- `ProcessLobby, ProcessTown` 다 `public` 으로 선언하긴 했지만, `private`으로 선언해주어도 문제없음
+- 어차피 모든걸 다 관장하는 **`Process() 메서드`가 public으로 선언되어 있고, 외부에서 사용될 용도니까**
+- [ ]  환영메시지 띄우기
+- [ ]  필드로 가기, 돌아가기
+
+```csharp
+private void ProcessTown()
+{
+	Console.WriteLine("마을에 들어왔습니다");
+  Console.WriteLine("[1] 필드로 가기");
+  Console.WriteLine("[2] 로비로 돌아가기");
+  Console.Write(" : ");
+
+  string input = Console.ReadLine();
+	switch(input)
+	{
+	case "1":
+		mode = GameMode.Field;
+		break;
+	case "2":
+		mode = GameMode.Lobby;
+		break;
+	}
+}
+```
+
+### Main 함수에서 테스트
+
+```csharp
+Game game = new Game();
+while (true)
+{
+	game.Process(); 
+}
+```
