@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "TextRPG2_Example/1.0.0": {
+        "runtime": {
+          "TextRPG2_Example.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TextRPG2_Example/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

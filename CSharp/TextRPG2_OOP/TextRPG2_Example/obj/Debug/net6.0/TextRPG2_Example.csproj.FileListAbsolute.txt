@@ -1,0 +1,15 @@
+/Users/sagep/Documents/TIL/CSharp/TextRPG2_OOP/TextRPG2_Example/bin/Debug/net6.0/TextRPG2_Example
+/Users/sagep/Documents/TIL/CSharp/TextRPG2_OOP/TextRPG2_Example/bin/Debug/net6.0/TextRPG2_Example.deps.json
+/Users/sagep/Documents/TIL/CSharp/TextRPG2_OOP/TextRPG2_Example/bin/Debug/net6.0/TextRPG2_Example.runtimeconfig.json
+/Users/sagep/Documents/TIL/CSharp/TextRPG2_OOP/TextRPG2_Example/bin/Debug/net6.0/TextRPG2_Example.dll
+/Users/sagep/Documents/TIL/CSharp/TextRPG2_OOP/TextRPG2_Example/bin/Debug/net6.0/TextRPG2_Example.pdb
+/Users/sagep/Documents/TIL/CSharp/TextRPG2_OOP/TextRPG2_Example/obj/Debug/net6.0/TextRPG2_Example.csproj.AssemblyReference.cache
+/Users/sagep/Documents/TIL/CSharp/TextRPG2_OOP/TextRPG2_Example/obj/Debug/net6.0/TextRPG2_Example.GeneratedMSBuildEditorConfig.editorconfig
+/Users/sagep/Documents/TIL/CSharp/TextRPG2_OOP/TextRPG2_Example/obj/Debug/net6.0/TextRPG2_Example.AssemblyInfoInputs.cache
+/Users/sagep/Documents/TIL/CSharp/TextRPG2_OOP/TextRPG2_Example/obj/Debug/net6.0/TextRPG2_Example.AssemblyInfo.cs
+/Users/sagep/Documents/TIL/CSharp/TextRPG2_OOP/TextRPG2_Example/obj/Debug/net6.0/TextRPG2_Example.csproj.CoreCompileInputs.cache
+/Users/sagep/Documents/TIL/CSharp/TextRPG2_OOP/TextRPG2_Example/obj/Debug/net6.0/TextRPG2_Example.dll
+/Users/sagep/Documents/TIL/CSharp/TextRPG2_OOP/TextRPG2_Example/obj/Debug/net6.0/refint/TextRPG2_Example.dll
+/Users/sagep/Documents/TIL/CSharp/TextRPG2_OOP/TextRPG2_Example/obj/Debug/net6.0/TextRPG2_Example.pdb
+/Users/sagep/Documents/TIL/CSharp/TextRPG2_OOP/TextRPG2_Example/obj/Debug/net6.0/TextRPG2_Example.genruntimeconfig.cache
+/Users/sagep/Documents/TIL/CSharp/TextRPG2_OOP/TextRPG2_Example/obj/Debug/net6.0/ref/TextRPG2_Example.dll
