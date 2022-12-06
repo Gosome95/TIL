@@ -98,7 +98,7 @@ public enum CreatureType
 }
 ```
 
-- [ ]  class `Creature` 에서 구조체 관련 함수 설정
+- [ ]  class `Creature` 에서 구조체를 인자로 받는 생성자 설정
 
 ```csharp
 CreatureType type;
