@@ -293,7 +293,7 @@ switch(input)
 ```csharp
 private void ProcessTown()
 {
-	Console.WriteLine("마을에 들어왔습니다");
+  Console.WriteLine("마을에 들어왔습니다");
   Console.WriteLine("[1] 필드로 가기");
   Console.WriteLine("[2] 로비로 돌아가기");
   Console.Write(" : ");

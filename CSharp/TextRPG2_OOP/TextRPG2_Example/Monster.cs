@@ -5,22 +5,23 @@ using System.Threading.Tasks;
 
 namespace TextRPG2_Example
 {
-    public enum MonsterType
+   public enum MonsterType
     {
         None,
-        Slime = 1,
-        Orc = 2,
-        Skeleton = 3
+        Slime,
+        Orc,
+        Skeleton
     }
+
     class Monster : Creature
     {
-        protected MonsterType monType = MonsterType.None;
-        protected Monster(MonsterType type) : base(CreatureType.Monster)
-        {
-            monType = type;
-        }
+        protected MonsterType monsterType = MonsterType.None;
 
-        public MonsterType GetMonsterType(){return monType;}
+        protected Monster(MonsterType type) : base(CreatrueType.Monster)
+        {
+            monsterType = type;
+        }
+        public MonsterType GetMonsterType() { return monsterType; }
     }
 
     class Slime : Monster

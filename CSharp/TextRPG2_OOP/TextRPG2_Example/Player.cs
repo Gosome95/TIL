@@ -5,22 +5,23 @@ using System.Threading.Tasks;
 
 namespace TextRPG2_Example
 {
-    public enum PlayerType
+   public enum PlayerType
     {
         None,
-        Knight = 1,
-        Archer = 2,
-        Mage = 3
-    }   
+        Knight,
+        Archer,
+        Mage
+    }
+   
     class Player : Creature
     {
-       protected PlayerType playerType = PlayerType.None;
-       protected Player(PlayerType type) : base(CreatureType.Player)
-       {
+        protected PlayerType playerType = PlayerType.None;
+        protected Player(PlayerType type) : base(CreatrueType.Player)
+        {
             playerType = type;
-       }
+        }
 
-       public PlayerType GetPlayerType(){return playerType; }
+        public PlayerType GetPlayerType() { return playerType; }
     }
 
     class Knight : Player
@@ -43,5 +44,5 @@ namespace TextRPG2_Example
         {
             SetInfo(100, 10);
         }
-    }                        
+    }           
 }

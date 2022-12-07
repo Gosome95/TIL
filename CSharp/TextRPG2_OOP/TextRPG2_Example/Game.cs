@@ -15,7 +15,7 @@ namespace TextRPG2_Example
 
     class Game
     {
-        private GameMode mode = GameMode.Lobby;
+        protected GameMode mode = GameMode.Lobby;
         private Player player = null;
 
         public void Process()
@@ -40,7 +40,6 @@ namespace TextRPG2_Example
             Console.WriteLine("[2] 궁수");
             Console.WriteLine("[3] 마법사");
             Console.Write("직업을 선택해주세요 : ");
-
             string input = Console.ReadLine();
             switch(input)
             {
@@ -58,16 +57,14 @@ namespace TextRPG2_Example
                     break;
             }
         }
-
         private void ProcessTown()
         {
             Console.WriteLine("마을에 들어왔습니다");
             Console.WriteLine("[1] 필드로 가기");
             Console.WriteLine("[2] 로비로 돌아가기");
             Console.Write(" : ");
-
             string input = Console.ReadLine();
-            switch(input)
+            switch (input)
             {
                 case "1":
                     mode = GameMode.Field;
@@ -77,6 +74,5 @@ namespace TextRPG2_Example
                     break;
             }
         }
-
     }
 }
