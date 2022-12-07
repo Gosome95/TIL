@@ -320,3 +320,115 @@ while (true)
 	game.Process(); 
 }
 ```
+
+## TextRPG2 - 배틀
+
+### `ProcessField()`
+
+- [ ]  일정확률로 도망가기 구현을 위한 `Random` 변수 선언
+    - [ ]  이전에는 각 함수 안에서 rand를 각각 선언했지만 이제 클래스 단위에서 `rand` 를 맨 위에다가 선언해주자
+    
+    ```csharp
+    Random rand = new Random();
+    ```
+    
+- [ ]  `몬스터 생성`을 위해서 위 플레이어 생성처럼 스택 메모리 안에서가 아닌 클래스에 `Monster` 변수 선언
+
+```csharp
+private Monster monster = null;
+```
+
+- [ ]  `private void ProcessField()`
+
+```csharp
+Console.WriteLine("필드에 입장했습니다");
+Console.WriteLine("[1] 싸우기");
+Console.WriteLine("[2] 일정확률로 도망가기");
+
+CreateRandmMonster()
+```
+
+- [ ]  몬스터를 생성해주는 부분만 따로 함수로 다시 만들어주기
+    - [ ]  `private void CreateRandmMonster()`
+    
+    ```csharp
+    int randValue = rand.Next(0, 3);
+    switch (ranValue)
+    {
+    	case 0:
+    	monster = new Slime();
+    	Console.WriteLine("슬라임이 생성되었습니다");
+    	break;
+    case 1:
+    	monster = new Orc();
+    	Console.WriteLine("슬라임이 생성되었습니다");
+    	break;
+    case 2:
+    	monster = new Skeleton();
+    	Console.WriteLine("슬라임이 생성되었습니다");
+    	break;
+    }
+    ```
+    
+- [ ]  사용자 입력에 따른 `switch` 문으로 `싸운다` & `도망가기` 만들어주기
+
+```csharp
+Console.WriteLine("필드에 입장했습니다");
+Console.WriteLine("[1] 싸우기");
+Console.WriteLine("[2] 일정확률로 도망가기");
+
+CreateRandmMonster();
+
+string input = Console.ReadLine();
+switch(input)
+{
+	case "1":
+		ProcessFight();
+		break;
+	case "2":
+		TryEscape();
+		break;
+}
+```
+
+- [ ]  싸운다 → `private void ProcessFight( )`
+    - 이전 절차지향 TextRPG1에서는 Player player, Mosnter monster 이렇게 함수 인자를 넘겨줘야 했지만
+    클래스 위에 우리는 이미 `Player`, `Monster` 타입 `사용자정의 클래스`를 갖고 있으므로 그 변수를 그대로 사용할 수 있다.
+    
+    ```csharp
+    while(true)
+    {
+    	// Player 선공 
+    	int damage = player.GetAttack();
+    	monster.OnDamaged(damage);
+    	if(monster.IsDead())
+    	{
+    		Console.WriteLine("승리했습니다");
+    		Console.WriteLine($"남은 체력 {player.GetHP()}");
+    		break;
+    	}
+    
+    	damage = Monster.GetAttack();
+    	player.OnDamged(damage);
+    	if(player.IsDead())
+    	{
+    		Console.WriteLine("패배했습니다");
+    		mode = GameMode.Lobby;
+    		break;
+    	}
+    }
+    ```
+    
+- [ ]  일정확률로 도망가기 → `private void TryEscape()`
+
+```csharp
+int randValue = rand.Next(1, 101);
+if(randValue <= 33)
+{
+	mode = GameMode.Town;
+}
+else
+{
+	ProcessFight();
+}
+```
