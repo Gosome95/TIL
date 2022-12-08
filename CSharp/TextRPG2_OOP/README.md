@@ -87,7 +87,7 @@ public void OnDamaged(int damage)
 }
 ```
 
-- [ ]  `Creature` 클래스가 `Player` 인지 `Monster`인지 알아야 하니까 `구조체` `enum` 추가
+- [ ]  `Creature` 클래스가 `Player` 인지 `Monster`인지 알아야 하니까 `열거형` `enum` 추가
 
 ```csharp
 public enum CreatureType
@@ -98,7 +98,7 @@ public enum CreatureType
 }
 ```
 
-- [ ]  class `Creature` 에서 구조체를 인자로 받는 생성자 설정
+- [ ]  class `Creature` 에서 열거형 enum 인자로 받는 생성자 설정
 
 ```csharp
 CreatureType type;
@@ -134,7 +134,7 @@ protected Player(PlayerType type) : base(CreatureType.Player)
 
 ### `Mosnter` class 설계
 
-- [ ]  `MosnterType` 구조체 설정
+- [ ]  `MosnterType` 열거형 enum 설정
     
     ```csharp
     public enum MonsterType
@@ -146,7 +146,7 @@ protected Player(PlayerType type) : base(CreatureType.Player)
     }
     ```
     
-- [ ]  `Monster` 클래스 내 구조체를 인자로 받는 `생성자` 설정
+- [ ]  `Monster` 클래스 내 열거형 enum 인자로 받는 `생성자` 설정
 - [ ]  Player 클래스와 마찬가지로 `GetMonsterType` 설정
 - [ ]  `Slime`, `Orc`, `Skeleton` 각각의 `클래스`를 만들어준다
     - [ ]  `생성자`도 추가
@@ -181,7 +181,7 @@ monster.OnDamaged(damage);
 ## TextRPG2 게임진행 
 - [ ]  `Game` 이라는 `클래스`로 관리
     - [ ]  Game Manager 역할
-    - [ ]  구조체 `enum`으로 `게임모드` 나누기 { `로비입장`, `마을입장`, `필드입장`}  세가지 경우의 수
+    - [ ]  열거형 `enum`으로 `게임모드` 나누기 { `로비입장`, `마을입장`, `필드입장`}  세가지 경우의 수
     
     ```csharp
     public enum GameMode
@@ -196,7 +196,7 @@ monster.OnDamaged(damage);
 
 ### class Game
 
-- [ ]  구조체 변수 선언
+- [ ]  열거형 변수 선언
     - [ ]  `GameMode.None` 으로 설정할 시, 아무 모드도 선택되지 않아서 아무런 동작을 하지 않음
     Set 함수로 설정해도 되지만 여기서는 처음 모드 시작을 `Lobby`로 강제 설정
     
