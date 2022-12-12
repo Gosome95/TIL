@@ -7,36 +7,36 @@ namespace TextRPG2_Example
 {
     public enum CreatureType
     {
-        None,
+        None = 0,
         Player = 1,
         Monster = 2
     }
 
     class Creature
     {
-        protected int hp = 0;
-        protected int attack = 0;
+        protected int _hp = 0;
+        protected int _attack = 0;
         protected CreatureType creatureType = CreatureType.None;
+
         protected Creature(CreatureType type)
         {
             creatureType = type;
         }
 
-        public CreatureType GetCreatureType(){return creatureType; }
+        public CreatureType GetCreatureType() { return creatureType; }
         public void SetInfo(int hp, int attack)
         {
-            this.hp = hp;
-            this.attack = attack;
+            _hp = hp;
+            _attack = attack;
         }
-
-        public int GetHp(){return hp;}
-        public int GetAttack(){return attack;}
-        public bool IsDead(){return hp <= 0;}
-        public void OndDamaged(int damage)
+        public int GetHp() { return _hp; }
+        public int GetAttack() { return _attack; }
+        public bool IsDead() { return _hp <= 0; }
+        public void OnDamaged(int damage)
         {
-            hp -= damage;
-            if(hp < 0)
-                hp = 0;
+            _hp -= damage;
+            if (_hp < 0)
+                _hp = 0;
         }
     }
 }
