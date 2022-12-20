@@ -4,7 +4,7 @@ namespace MyApp
 {
     class Program
     {
-        enum PlayerType
+       enum PlayerType
         {
             None = 0,
             Knight = 1,
