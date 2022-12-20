@@ -7,10 +7,10 @@ namespace TextRPG2_Example
 {
    public enum PlayerType
     {
-        None = 0,
-        Knight = 1,
-        Archer = 2,
-        Mage = 3
+        None,
+        Knight,
+        Archer,
+        Mage
     }
 
     class Player : Creature
@@ -22,8 +22,29 @@ namespace TextRPG2_Example
         }
 
         public PlayerType GetPlayerType() { return playerType; }
-    }
 
+        // Random damage
+        public int randDamage()
+        {
+            int randAttack;
+            switch (playerType)
+            {
+                case PlayerType.Knight:
+                    randAttack = _rand.Next(10, 16);
+                    _attack = randAttack;
+                    break;
+                case PlayerType.Archer:
+                    randAttack = _rand.Next(12, 17);
+                    _attack = randAttack;
+                    break;
+                case PlayerType.Mage:
+                    randAttack = _rand.Next(14, 20);
+                    _attack = randAttack;
+                    break;
+            }
+            return _attack;
+        }
+    }
     class Knight : Player
     {
         public Knight() : base(PlayerType.Knight)
@@ -35,14 +56,14 @@ namespace TextRPG2_Example
     {
         public Archer() : base(PlayerType.Archer)
         {
-            SetInfo(100, 10);
+            SetInfo(70, 12);
         }
     }
     class Mage : Player
     {
         public Mage() : base(PlayerType.Mage)
         {
-            SetInfo(100, 10);
+            SetInfo(60, 16);
         }
     }
 }

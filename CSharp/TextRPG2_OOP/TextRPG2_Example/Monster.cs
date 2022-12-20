@@ -7,15 +7,14 @@ namespace TextRPG2_Example
 {
     public enum MonsterType
     {
-        None = 0,
-        Slime = 1,
-        Orc = 2,
-        Skeleton = 3
+        None,
+        Slime,
+        Orc,
+        Skeleton
     }
-
     class Monster : Creature
     {
-        protected MonsterType monsterType = MonsterType.None; 
+        protected MonsterType monsterType = MonsterType.None;
         protected Monster(MonsterType type) : base(CreatureType.Monster)
         {
             monsterType = type;
@@ -27,21 +26,21 @@ namespace TextRPG2_Example
     {
         public Slime() : base(MonsterType.Slime)
         {
-            SetInfo(15, 5);
+            SetInfo(20, 3);
         }
     }
     class Orc : Monster
     {
         public Orc() : base(MonsterType.Orc)
         {
-            SetInfo(15, 5);
+            SetInfo(30, 6);
         }
     }
     class Skeleton : Monster
     {
         public Skeleton() : base(MonsterType.Skeleton)
         {
-            SetInfo(15, 5);
+            SetInfo(25, 10);
         }
     }
 }
